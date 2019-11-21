@@ -30,5 +30,13 @@ public class Season {
     @EqualsAndHashCode.Exclude
     private Set<Episode> episodes;
 
+    @Transient
+    private int numberOfEpisodes;
 
+    public void calculateNumOfEpisodes(){
+     numberOfEpisodes = episodes.size();
+    }
+
+    @Enumerated(EnumType.STRING)
+    private Generation generation;
 }

@@ -1,9 +1,11 @@
 package com.codecool.eszterszluka.series;
 
 import com.codecool.eszterszluka.series.entities.Episode;
+import com.codecool.eszterszluka.series.entities.Generation;
 import com.codecool.eszterszluka.series.entities.Season;
 import com.codecool.eszterszluka.series.entities.Series;
 import com.codecool.eszterszluka.series.repositories.SeriesRepository;
+import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -62,34 +64,42 @@ public class SeriesApplication {
             Season season1 = Season.builder()
                     .name("TOS01")
                     .releaseDate(LocalDate.of(1972, 01, 01))
+                    .generation(Generation.TOS)
                     .episodes(episodes1)
                     .build();
 
             setSeasonInAllEpisodes(season1);
+            season1.calculateNumOfEpisodes();
 
             Season season2 = Season.builder()
-                    .name("TOS02")
+                    .name("TNG02")
                     .releaseDate(LocalDate.of(1973, 1, 1))
+                    .generation(Generation.TNG)
                     .episodes(episodes2)
                     .build();
 
             setSeasonInAllEpisodes(season2);
+            season2.calculateNumOfEpisodes();
 
             Season season3 = Season.builder()
-                    .name("TOS03")
+                    .name("DS903")
                     .releaseDate(LocalDate.of(1974, 1, 1))
                     .episodes(episodes3)
+                    .generation(Generation.DS9)
                     .build();
 
             setSeasonInAllEpisodes(season3);
+            season3.calculateNumOfEpisodes();
 
             Season season4 = Season.builder()
                     .name("TOS04")
                     .releaseDate(LocalDate.of(1975, 1, 1))
                     .episodes(episodes4)
+                    .generation(Generation.VOYAGER)
                     .build();
 
             setSeasonInAllEpisodes(season4);
+            season4.calculateNumOfEpisodes();
 
             Series starTrek = Series.builder()
                     .name("Star Trek")
@@ -98,6 +108,7 @@ public class SeriesApplication {
                     .season(season2)
                     .season(season3)
                     .season(season4)
+                    .characters(Lists.newArrayList("James T. Kirk", "Spock", "Sulu", "Scotty", "Uhura"))
                     .build();
 
             season1.setSeries(starTrek);
