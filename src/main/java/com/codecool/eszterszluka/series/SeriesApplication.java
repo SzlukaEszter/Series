@@ -32,7 +32,6 @@ public class SeriesApplication {
     public CommandLineRunner init(){
 
         return args -> {
-            //todo Episode.setSeason(Season) for all Episodes
             Set<Episode> episodes1 = IntStream.range(1, 9)
                     .boxed()
                     .map(integer -> Episode.builder()
